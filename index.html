@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Para Ti</title>
+  <title>HOLA MILLA</title>
 
-  <!-- Tipografía elegante -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
@@ -14,6 +13,111 @@
       --pink-soft: #fde2e8;
       --pink-dark: #e78fb3;
       --text-main: #4a2c3a;
+      --green-light: #a8d5ba;
+      --green-medium: #8dbf9b;
+      --yes-color: #8dbf9b;
+      --no-color: #e78fb3;
+    }
+
+    /* ANIMACIÓN DEL TALLO */
+    .draw-stem {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: drawStem 2.5s ease-out forwards;
+    }
+
+    /* CONTENEDOR DEL RACIMO */
+    .bloom-flower {
+      opacity: 0;
+      animation: bloomGroup 0.6s ease-out forwards;
+      transform-origin: center;
+    }
+
+    /* PÉTALOS Y CENTROS */
+    .bloom-flower .flower-petal,
+    .bloom-flower .flower-center {
+      opacity: 0;
+      transform: scale(0);
+      transform-origin: center;
+      animation: petalOpen 0.8s cubic-bezier(.25,.8,.25,1) forwards;
+    }
+
+    /* DESFASE PROGRESIVO ENTRE PÉTALOS */
+    .bloom-flower .flower-petal:nth-child(1) { animation-delay: 0.05s; }
+    .bloom-flower .flower-petal:nth-child(2) { animation-delay: 0.1s; }
+    .bloom-flower .flower-petal:nth-child(3) { animation-delay: 0.15s; }
+    .bloom-flower .flower-petal:nth-child(4) { animation-delay: 0.2s; }
+    .bloom-flower .flower-petal:nth-child(5) { animation-delay: 0.25s; }
+    .bloom-flower .flower-petal:nth-child(6) { animation-delay: 0.3s; }
+    .bloom-flower .flower-petal:nth-child(7) { animation-delay: 0.35s; }
+    .bloom-flower .flower-petal:nth-child(8) { animation-delay: 0.4s; }
+    .bloom-flower .flower-petal:nth-child(9) { animation-delay: 0.45s; }
+
+    /* EL CENTRO APARECE AL FINAL */
+    .bloom-flower .flower-center {
+      animation-delay: 0.5s;
+    }
+
+    /* ANIMACIONES */
+    @keyframes drawStem {
+      0% {
+        stroke-dashoffset: 1000;
+      }
+      80% {
+        stroke-dashoffset: 0;
+      }
+      100% {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes bloomGroup {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes petalOpen {
+      0% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      70% {
+        opacity: 1;
+        transform: scale(1.15);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0); opacity: 0; }
+      70% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes celebration {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes sadShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
     }
 
     * {
@@ -42,10 +146,99 @@
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 3rem;
+      font-size: 2.8rem;
       font-weight: 600;
       margin-bottom: 1rem;
       color: var(--pink-dark);
+    }
+
+    .question-box {
+      background: white;
+      padding: 1.5rem 2rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(231, 143, 179, 0.15);
+      margin: 2rem auto;
+      max-width: 500px;
+      border: 2px solid var(--pink-main);
+    }
+
+    .question-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--pink-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .options-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      opacity: 0;
+      animation: fadeIn 0.5s ease 6s forwards;
+    }
+
+    .option-btn {
+      padding: 1rem 2.5rem;
+      font-size: 1.3rem;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      min-width: 140px;
+    }
+
+    .yes-btn {
+      background-color: var(--yes-color);
+      color: white;
+    }
+
+    .yes-btn:hover {
+      background-color: #7daa8b;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(141, 191, 155, 0.3);
+    }
+
+    .no-btn {
+      background-color: var(--no-color);
+      color: white;
+    }
+
+    .no-btn:hover {
+      background-color: #d57fa3;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(231, 143, 179, 0.3);
+    }
+
+    .response-message {
+      font-size: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    .response-message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .happy-message {
+      background-color: rgba(141, 191, 155, 0.15);
+      color: #4a7a56;
+      border: 2px solid var(--yes-color);
+    }
+
+    .sad-message {
+      background-color: rgba(231, 143, 179, 0.15);
+      color: #8a3a5c;
+      border: 2px solid var(--no-color);
     }
 
     p {
@@ -55,135 +248,424 @@
       opacity: 0.9;
     }
 
-    /* Gypsophila SVG */
-    .flower {
-      width: 260px;
+    .flower-container {
       margin: 2rem auto;
+      position: relative;
+      width: 300px;
+      height: 450px;
       animation: float 6s ease-in-out infinite;
     }
 
-    .stem {
-      stroke: #8dbf9b;
-      stroke-width: 3;
-      fill: none;
+    .flower {
+      width: 100%;
+      height: 100%;
     }
 
-    .petal {
+    .stem {
+      stroke: var(--green-medium);
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+    }
+
+    .flower-petal {
       fill: #ffffff;
       stroke: #f1c0d0;
-      stroke-width: 1;
+      stroke-width: 0.4;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05));
     }
 
-    .center {
+    .flower-center {
       fill: var(--pink-main);
+      filter: drop-shadow(0 0.5px 1px rgba(231, 143, 179, 0.3));
     }
 
-    /* Corazones flotantes */
     .heart {
       position: absolute;
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       background: var(--pink-main);
       transform: rotate(45deg);
       animation: rise 8s linear infinite;
-      opacity: 0.6;
+      opacity: 0.5;
     }
 
     .heart::before,
     .heart::after {
       content: '';
       position: absolute;
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       background: var(--pink-main);
       border-radius: 50%;
     }
 
     .heart::before {
-      top: -6px;
+      top: -5px;
       left: 0;
     }
 
     .heart::after {
-      left: -6px;
+      left: -5px;
       top: 0;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
     }
 
     @keyframes rise {
       from { bottom: -20px; opacity: 0; }
       to { bottom: 110%; opacity: 0.7; }
     }
+
+    /* Indicador de animación */
+    .progress {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9rem;
+      color: var(--pink-dark);
+      opacity: 0.7;
+      transition: opacity 0.5s;
+    }
+
+    .progress.fade-out {
+      opacity: 0;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Audio: coloca tu mp3 en la misma carpeta y cambia el nombre si es necesario -->
-  <audio autoplay loop>
+  <audio id="bgMusic" loop>
     <source src="cancion.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio HTML5.
   </audio>
 
+  <div class="progress" id="progressText">La flor está creciendo...</div>
+
   <div class="container">
-    <!-- EDITA LIBREMENTE ESTOS TEXTOS -->
-    <h1>Un mensaje para ti</h1>
+    <h1>Te tengo una pregunta importante</h1>
     <p>
-      Aquí puedes escribir tu texto romántico.<br>
-      Puedes editar, borrar o agregar lo que quieras.
+      No te tomará nada de tiempo responderme,<br>
+      y me hará muy muy feliz saber tu respuesta.
     </p>
 
-    <!-- Gypsophila (Baby's Breath) -->
-    <svg class="flower" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
-      <path class="stem" d="M100 400 C100 300, 70 250, 90 200 C110 150, 130 120, 120 80" />
+    <!-- Gypsophila con floración mejorada -->
+    <div class="flower-container">
+      <svg class="flower" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+        
+        <!-- TALLO PRINCIPAL -->
+        <path id="main-stem" class="stem draw-stem" d="M100 380 Q95 320, 105 280 Q115 240, 95 200 Q85 170, 100 140 Q115 110, 120 80" />
+        
+        <!-- RAMA DERECHA -->
+        <path class="stem draw-stem" style="animation-delay: 1.0s" d="M105 280 Q120 260, 130 240" />
+        
+        <!-- RAMA IZQUIERDA -->
+        <path class="stem draw-stem" style="animation-delay: 1.5s" d="M95 200 Q85 180, 75 160" />
+        
+        <!-- RAMA MEDIA -->
+        <path class="stem draw-stem" style="animation-delay: 2.0s" d="M100 140 Q110 120, 125 100" />
 
-      <g transform="translate(120,80)">
-        <circle class="petal" cx="0" cy="-6" r="6" />
-        <circle class="petal" cx="6" cy="0" r="6" />
-        <circle class="petal" cx="0" cy="6" r="6" />
-        <circle class="petal" cx="-6" cy="0" r="6" />
-        <circle class="center" cx="0" cy="0" r="3" />
-      </g>
+        <!-- RACIMO PRINCIPAL (parte superior) -->
+        <g class="bloom-flower" style="animation-delay: 2.8s" transform="translate(120,80)">
+          <circle class="flower-petal" cx="0" cy="0" r="5" />
+          <circle class="flower-petal" cx="8" cy="-3" r="4.5" />
+          <circle class="flower-petal" cx="-7" cy="-4" r="4.5" />
+          <circle class="flower-petal" cx="6" cy="6" r="4.5" />
+          <circle class="flower-petal" cx="-5" cy="5" r="4.5" />
+          <circle class="flower-petal" cx="10" cy="2" r="4" />
+          <circle class="flower-petal" cx="-9" cy="1" r="4" />
+          <circle class="flower-petal" cx="12" cy="-5" r="3.8" />
+          <circle class="flower-petal" cx="-11" cy="-6" r="3.8" />
+          
+          <circle class="flower-center" cx="0" cy="0" r="2" />
+          <circle class="flower-center" cx="8" cy="-3" r="1.8" />
+          <circle class="flower-center" cx="-7" cy="-4" r="1.8" />
+        </g>
 
-      <g transform="translate(90,160)">
-        <circle class="petal" cx="0" cy="-5" r="5" />
-        <circle class="petal" cx="5" cy="0" r="5" />
-        <circle class="petal" cx="0" cy="5" r="5" />
-        <circle class="petal" cx="-5" cy="0" r="5" />
-        <circle class="center" cx="0" cy="0" r="2.5" />
-      </g>
+        <!-- RACIMO DERECHO -->
+        <g class="bloom-flower" style="animation-delay: 3.8s" transform="translate(130,240)">
+          <circle class="flower-petal" cx="0" cy="0" r="4" />
+          <circle class="flower-petal" cx="7" cy="-2" r="3.5" />
+          <circle class="flower-petal" cx="-6" cy="-3" r="3.5" />
+          <circle class="flower-petal" cx="5" cy="5" r="3.5" />
+          <circle class="flower-petal" cx="-4" cy="4" r="3.5" />
+          <circle class="flower-petal" cx="8" cy="2" r="3.3" />
+          <circle class="flower-petal" cx="-7" cy="1" r="3.3" />
+          
+          <circle class="flower-center" cx="0" cy="0" r="1.6" />
+          <circle class="flower-center" cx="7" cy="-2" r="1.4" />
+        </g>
 
-      <g transform="translate(110,220)">
-        <circle class="petal" cx="0" cy="-5" r="5" />
-        <circle class="petal" cx="5" cy="0" r="5" />
-        <circle class="petal" cx="0" cy="5" r="5" />
-        <circle class="petal" cx="-5" cy="0" r="5" />
-        <circle class="center" cx="0" cy="0" r="2.5" />
-      </g>
-    </svg>
+        <!-- FLOR PEQUEÑA EN UNIÓN DERECHA -->
+        <g class="bloom-flower" style="animation-delay: 4.0s" transform="translate(105,280)">
+          <circle class="flower-petal" cx="0" cy="0" r="3" />
+          <circle class="flower-petal" cx="5" cy="-1" r="2.8" />
+          <circle class="flower-petal" cx="-4" cy="2" r="2.8" />
+          
+          <circle class="flower-center" cx="0" cy="0" r="1.2" />
+        </g>
+
+        <!-- RACIMO IZQUIERDO -->
+        <g class="bloom-flower" style="animation-delay: 4.3s" transform="translate(75,160)">
+          <circle class="flower-petal" cx="0" cy="0" r="4" />
+          <circle class="flower-petal" cx="6" cy="-2" r="3.5" />
+          <circle class="flower-petal" cx="-5" cy="-3" r="3.5" />
+          <circle class="flower-petal" cx="4" cy="5" r="3.5" />
+          <circle class="flower-petal" cx="-3" cy="6" r="3.5" />
+          <circle class="flower-petal" cx="7" cy="3" r="3.2" />
+          
+          <circle class="flower-center" cx="0" cy="0" r="1.6" />
+          <circle class="flower-center" cx="6" cy="-2" r="1.4" />
+        </g>
+
+        <!-- FLOR PEQUEÑA EN UNIÓN IZQUIERDA -->
+        <g class="bloom-flower" style="animation-delay: 4.5s" transform="translate(95,200)">
+          <circle class="flower-petal" cx="0" cy="0" r="3" />
+          <circle class="flower-petal" cx="-4" cy="2" r="2.8" />
+          <circle class="flower-petal" cx="3" cy="-3" r="2.8" />
+          
+          <circle class="flower-center" cx="0" cy="0" r="1.2" />
+        </g>
+
+        <!-- RACIMO MEDIO -->
+        <g class="bloom-flower" style="animation-delay: 4.8s" transform="translate(125,100)">
+          <circle class="flower-petal" cx="0" cy="0" r="4.5" />
+          <circle class="flower-petal" cx="8" cy="-1" r="4" />
+          <circle class="flower-petal" cx="-7" cy="-2" r="4" />
+          <circle class="flower-petal" cx="5" cy="6" r="4" />
+          <circle class="flower-petal" cx="-6" cy="5" r="4" />
+          <circle class="flower-petal" cx="9" cy="3" r="3.8" />
+          <circle class="flower-petal" cx="-8" cy="4" r="3.8" />
+          <circle class="flower-petal" cx="11" cy="-3" r="3.6" />
+          
+          <circle class="flower-center" cx="0" cy="0" r="1.8" />
+          <circle class="flower-center" cx="8" cy="-1" r="1.6" />
+          <circle class="flower-center" cx="-7" cy="-2" r="1.6" />
+        </g>
+
+        <!-- FLOR PEQUEÑA EN UNIÓN MEDIA -->
+        <g class="bloom-flower" style="animation-delay: 5.0s" transform="translate(100,140)">
+          <circle class="flower-petal" cx="0" cy="0" r="3" />
+          <circle class="flower-petal" cx="4" cy="1" r="2.8" />
+          <circle class="flower-petal" cx="-3" cy="-2" r="2.8" />
+          
+          <circle class="flower-center" cx="0" cy="0" r="1.2" />
+        </g>
+      </svg>
+    </div>
+    
+    <!-- Caja de pregunta -->
+    <div class="question-box">
+      <div class="question-text">¿Quieres ser mi novia?</div>
+      
+      <div class="options-container">
+        <button class="option-btn yes-btn" id="yesBtn">SÍ</button>
+        <button class="option-btn no-btn" id="noBtn">NO</button>
+      </div>
+    </div>
+
+    <!-- Mensaje de respuesta (oculto inicialmente) -->
+    <div class="response-message" id="responseMessage"></div>
   </div>
 
-  <!-- Corazones dinámicos -->
   <script>
+    // Audio automático
+    const audio = document.getElementById('bgMusic');
+    const progressText = document.getElementById('progressText');
+    
+    // Mensajes de progreso
+    const messages = [
+      { time: 0, text: "Creciendo el tallo principal..." },
+      { time: 1000, text: "Formando las ramas..." },
+      { time: 2800, text: "Primer racimo floreciendo..." },
+      { time: 3800, text: "Racimo derecho abriéndose..." },
+      { time: 4300, text: "Racimo izquierdo floreciendo..." },
+      { time: 4800, text: "Último racimo desplegándose..." },
+      { time: 5500, text: "¡La flor está lista!" }
+    ];
+    
+    messages.forEach(msg => {
+      setTimeout(() => {
+        progressText.textContent = msg.text;
+      }, msg.time);
+    });
+    
+    // Ocultar progreso al final
+    setTimeout(() => {
+      progressText.classList.add('fade-out');
+      setTimeout(() => {
+        progressText.style.display = 'none';
+      }, 1000);
+    }, 6500);
+
+    // Iniciar audio con interacción
+    document.addEventListener('click', function iniciarAudio() {
+      audio.play().catch(e => {
+        console.log("Audio iniciado");
+      });
+      document.removeEventListener('click', iniciarAudio);
+    }, { once: true });
+
+    // Corazones flotantes con variaciones
     const createHeart = () => {
       const heart = document.createElement('div');
       heart.className = 'heart';
+      
       heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = 6 + Math.random() * 4 + 's';
+      heart.style.animationDuration = (6 + Math.random() * 6) + 's';
+      
+      const size = 6 + Math.random() * 6;
+      heart.style.width = size + 'px';
+      heart.style.height = size + 'px';
+      
+      heart.style.opacity = 0.3 + Math.random() * 0.4;
+      
+      const hue = 330 + Math.random() * 20 - 10;
+      heart.style.backgroundColor = `hsl(${hue}, 70%, 75%)`;
+      
       document.body.appendChild(heart);
 
-      setTimeout(() => heart.remove(), 10000);
+      setTimeout(() => {
+        if (heart.parentNode) {
+          heart.remove();
+        }
+      }, 14000);
     };
 
-    setInterval(createHeart, 800);
+    // Generar corazones con ritmo variable
+    const generateHeart = () => {
+      createHeart();
+      
+      const baseTime = 600;
+      const randomTime = Math.random() * 800;
+      const currentTime = Date.now() - startTime;
+      
+      let multiplier = 1;
+      if (currentTime > 3000 && currentTime < 6000) {
+        multiplier = 0.7;
+      }
+      
+      setTimeout(generateHeart, (baseTime + randomTime) * multiplier);
+    };
+
+    const startTime = Date.now();
+    
+    // Iniciar generación de corazones
+    setTimeout(() => {
+      for (let i = 0; i < 5; i++) {
+        setTimeout(createHeart, i * 300);
+      }
+      
+      setTimeout(generateHeart, 1500);
+    }, 1000);
+
+    // Efecto especial cuando florece cada racimo
+    const bloomTimes = [2800, 3800, 4300, 4800, 4000, 4500, 5000];
+    
+    bloomTimes.forEach(time => {
+      setTimeout(() => {
+        for (let i = 0; i < 3; i++) {
+          setTimeout(() => {
+            createHeart();
+          }, i * 200);
+        }
+      }, time);
+    });
+
+    // MANEJO DE LA RESPUESTA
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const responseMessage = document.getElementById('responseMessage');
+    
+    // Respuesta SÍ
+    yesBtn.addEventListener('click', function() {
+      // Deshabilitar botones
+      yesBtn.disabled = true;
+      noBtn.disabled = true;
+      
+      // Cambiar estilos de los botones
+      yesBtn.style.animation = 'celebration 0.5s ease 3';
+      yesBtn.style.transform = 'scale(1.1)';
+      
+      // Mostrar mensaje feliz
+      responseMessage.textContent = "¡SÍÍÍÍ! 🥳 ¡Me acabas de hacer el hombre más feliz del mundo! 💖 No tienes idea de lo feliz que me haces. ¡Prometo hacértela pasar increíble siempre!";
+      responseMessage.className = 'response-message show happy-message';
+      
+      // Explosión de corazones
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          createHeart();
+        }, i * 50);
+      }
+      
+      // Cambiar color de corazones a verde (para celebrar)
+      setTimeout(() => {
+        const hearts = document.querySelectorAll('.heart');
+        hearts.forEach(heart => {
+          heart.style.backgroundColor = '#8dbf9b';
+        });
+      }, 100);
+      
+      // Mensaje adicional después de 3 segundos
+      setTimeout(() => {
+        const extraMessage = document.createElement('div');
+        extraMessage.className = 'response-message show happy-message';
+        extraMessage.style.marginTop = '1rem';
+        extraMessage.textContent = "Gracias por aceptar, amor. Te prometo que cada día será especial a tu lado. 💕";
+        document.querySelector('.question-box').appendChild(extraMessage);
+      }, 3000);
+    });
+    
+    // Respuesta NO
+    noBtn.addEventListener('click', function() {
+      // Deshabilitar botones
+      yesBtn.disabled = true;
+      noBtn.disabled = true;
+      
+      // Animación de tristeza
+      noBtn.style.animation = 'sadShake 0.5s ease 3';
+      document.querySelector('.flower-container').style.animation = 'sadShake 0.5s ease 3';
+      
+      // Mostrar mensaje triste
+      responseMessage.textContent = "Oh... entiendo 😔 Mi corazón se parte en mil pedazos, pero respeto tu decisión. Solo quería decirte lo especial que eres para mí. Quizás en otro momento...";
+      responseMessage.className = 'response-message show sad-message';
+      
+      // Cambiar color de corazones a rosa oscuro
+      setTimeout(() => {
+        const hearts = document.querySelectorAll('.heart');
+        hearts.forEach(heart => {
+          heart.style.backgroundColor = '#e78fb3';
+          heart.style.opacity = '0.3';
+        });
+      }, 100);
+      
+      // Hacer que la flor se vea más triste
+      const flower = document.querySelector('.flower');
+      flower.style.filter = 'grayscale(30%)';
+      flower.style.opacity = '0.8';
+      
+      // Mensaje adicional después de 3 segundos
+      setTimeout(() => {
+        const extraMessage = document.createElement('div');
+        extraMessage.className = 'response-message show sad-message';
+        extraMessage.style.marginTop = '1rem';
+        extraMessage.textContent = "Aunque me duela, siempre tendré un cariño especial por ti. Gracias por tu honestidad.";
+        document.querySelector('.question-box').appendChild(extraMessage);
+      }, 3000);
+    });
+    
+    // Efecto de hover para el botón NO (divertido)
+    let noClickCount = 0;
+    noBtn.addEventListener('mouseover', function() {
+      if (noClickCount < 3) {
+        const randomX = Math.random() * 100 - 50;
+        const randomY = Math.random() * 100 - 50;
+        noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+      }
+    });
+    
+    noBtn.addEventListener('click', function() {
+      noClickCount++;
+    });
+
   </script>
 
 </body>
