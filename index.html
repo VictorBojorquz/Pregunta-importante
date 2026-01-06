@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Ti</title>
+
+  <!-- Tipografía elegante -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pink-main: #f6b1c3;
+      --pink-soft: #fde2e8;
+      --pink-dark: #e78fb3;
+      --text-main: #4a2c3a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(180deg, var(--pink-soft), #ffffff);
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding: 2rem;
+      max-width: 800px;
+      animation: fadeIn 2s ease;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--pink-dark);
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    /* Gypsophila SVG */
+    .flower {
+      width: 260px;
+      margin: 2rem auto;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .stem {
+      stroke: #8dbf9b;
+      stroke-width: 3;
+      fill: none;
+    }
+
+    .petal {
+      fill: #ffffff;
+      stroke: #f1c0d0;
+      stroke-width: 1;
+    }
+
+    .center {
+      fill: var(--pink-main);
+    }
+
+    /* Corazones flotantes */
+    .heart {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: var(--pink-main);
+      transform: rotate(45deg);
+      animation: rise 8s linear infinite;
+      opacity: 0.6;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: var(--pink-main);
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -6px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -6px;
+      top: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes rise {
+      from { bottom: -20px; opacity: 0; }
+      to { bottom: 110%; opacity: 0.7; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Audio: coloca tu mp3 en la misma carpeta y cambia el nombre si es necesario -->
+  <audio autoplay loop>
+    <source src="cancion.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+
+  <div class="container">
+    <!-- EDITA LIBREMENTE ESTOS TEXTOS -->
+    <h1>Un mensaje para ti</h1>
+    <p>
+      Aquí puedes escribir tu texto romántico.<br>
+      Puedes editar, borrar o agregar lo que quieras.
+    </p>
+
+    <!-- Gypsophila (Baby's Breath) -->
+    <svg class="flower" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+      <path class="stem" d="M100 400 C100 300, 70 250, 90 200 C110 150, 130 120, 120 80" />
+
+      <g transform="translate(120,80)">
+        <circle class="petal" cx="0" cy="-6" r="6" />
+        <circle class="petal" cx="6" cy="0" r="6" />
+        <circle class="petal" cx="0" cy="6" r="6" />
+        <circle class="petal" cx="-6" cy="0" r="6" />
+        <circle class="center" cx="0" cy="0" r="3" />
+      </g>
+
+      <g transform="translate(90,160)">
+        <circle class="petal" cx="0" cy="-5" r="5" />
+        <circle class="petal" cx="5" cy="0" r="5" />
+        <circle class="petal" cx="0" cy="5" r="5" />
+        <circle class="petal" cx="-5" cy="0" r="5" />
+        <circle class="center" cx="0" cy="0" r="2.5" />
+      </g>
+
+      <g transform="translate(110,220)">
+        <circle class="petal" cx="0" cy="-5" r="5" />
+        <circle class="petal" cx="5" cy="0" r="5" />
+        <circle class="petal" cx="0" cy="5" r="5" />
+        <circle class="petal" cx="-5" cy="0" r="5" />
+        <circle class="center" cx="0" cy="0" r="2.5" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- Corazones dinámicos -->
+  <script>
+    const createHeart = () => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 6 + Math.random() * 4 + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 10000);
+    };
+
+    setInterval(createHeart, 800);
+  </script>
+
+</body>
+</html>
