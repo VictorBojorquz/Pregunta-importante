@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>HOLA MILLA</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
@@ -124,71 +124,106 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
       min-height: 100vh;
+      min-height: -webkit-fill-available;
       background: linear-gradient(180deg, var(--pink-soft), #ffffff);
       font-family: 'Montserrat', sans-serif;
       color: var(--text-main);
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 10px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    html {
+      height: -webkit-fill-available;
     }
 
     .container {
       text-align: center;
-      padding: 2rem;
-      max-width: 800px;
+      padding: 1rem;
+      width: 100%;
+      max-width: 500px;
       animation: fadeIn 2s ease;
     }
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
+      font-size: clamp(1.8rem, 6vw, 2.8rem);
       font-weight: 600;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       color: var(--pink-dark);
+      line-height: 1.3;
+      padding: 0 10px;
     }
 
     .question-box {
       background: white;
-      padding: 1.5rem 2rem;
+      padding: 1.2rem 1.5rem;
       border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(231, 143, 179, 0.15);
-      margin: 2rem auto;
-      max-width: 500px;
+      box-shadow: 0 5px 15px rgba(231, 143, 179, 0.15);
+      margin: 1.5rem auto;
+      width: 100%;
+      max-width: 400px;
       border: 2px solid var(--pink-main);
     }
 
     .question-text {
       font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
+      font-size: clamp(1.5rem, 5vw, 1.8rem);
       color: var(--pink-dark);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.4;
+      padding: 0 5px;
     }
 
     .options-container {
       display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
       opacity: 0;
       animation: fadeIn 0.5s ease 6s forwards;
+      width: 100%;
+    }
+
+    @media (min-width: 480px) {
+      .options-container {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.5rem;
+      }
     }
 
     .option-btn {
-      padding: 1rem 2.5rem;
-      font-size: 1.3rem;
+      padding: 0.9rem 1.8rem;
+      font-size: clamp(1.1rem, 4vw, 1.3rem);
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
       border: none;
       border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      min-width: 140px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      min-width: 120px;
+      width: 100%;
+      max-width: 160px;
+      touch-action: manipulation;
+    }
+
+    @media (min-width: 480px) {
+      .option-btn {
+        width: auto;
+        min-width: 140px;
+      }
     }
 
     .yes-btn {
@@ -196,10 +231,10 @@
       color: white;
     }
 
-    .yes-btn:hover {
+    .yes-btn:active {
       background-color: #7daa8b;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(141, 191, 155, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(141, 191, 155, 0.3);
     }
 
     .no-btn {
@@ -207,21 +242,23 @@
       color: white;
     }
 
-    .no-btn:hover {
+    .no-btn:active {
       background-color: #d57fa3;
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(231, 143, 179, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(231, 143, 179, 0.3);
     }
 
     .response-message {
-      font-size: 1.5rem;
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
       font-family: 'Playfair Display', serif;
-      padding: 1.5rem;
-      margin-top: 2rem;
+      padding: 1.2rem;
+      margin-top: 1.5rem;
       border-radius: 10px;
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.5s ease;
+      word-break: break-word;
+      line-height: 1.4;
     }
 
     .response-message.show {
@@ -242,18 +279,34 @@
     }
 
     p {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      margin-bottom: 2rem;
+      font-size: clamp(1rem, 4vw, 1.2rem);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
       opacity: 0.9;
+      padding: 0 10px;
     }
 
     .flower-container {
-      margin: 2rem auto;
+      margin: 1.5rem auto;
       position: relative;
-      width: 300px;
-      height: 450px;
+      width: 250px;
+      height: 375px;
       animation: float 6s ease-in-out infinite;
+      max-width: 90%;
+    }
+
+    @media (max-width: 380px) {
+      .flower-container {
+        width: 220px;
+        height: 330px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .flower-container {
+        width: 300px;
+        height: 450px;
+      }
     }
 
     .flower {
@@ -282,31 +335,32 @@
 
     .heart {
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       background: var(--pink-main);
       transform: rotate(45deg);
       animation: rise 8s linear infinite;
       opacity: 0.5;
+      pointer-events: none;
     }
 
     .heart::before,
     .heart::after {
       content: '';
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       background: var(--pink-main);
       border-radius: 50%;
     }
 
     .heart::before {
-      top: -5px;
+      top: -4px;
       left: 0;
     }
 
     .heart::after {
-      left: -5px;
+      left: -4px;
       top: 0;
     }
 
@@ -318,17 +372,66 @@
     /* Indicador de animación */
     .progress {
       position: fixed;
-      bottom: 20px;
+      bottom: 15px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 0.9rem;
+      font-size: clamp(0.8rem, 3vw, 0.9rem);
       color: var(--pink-dark);
       opacity: 0.7;
       transition: opacity 0.5s;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 5px 12px;
+      border-radius: 15px;
+      white-space: nowrap;
+      z-index: 100;
+      max-width: 90%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .progress.fade-out {
       opacity: 0;
+    }
+
+    /* Ajustes para pantallas muy pequeñas */
+    @media (max-width: 350px) {
+      .container {
+        padding: 0.8rem;
+      }
+      
+      .question-box {
+        padding: 1rem;
+      }
+      
+      .option-btn {
+        padding: 0.8rem 1.2rem;
+        min-width: 100px;
+      }
+      
+      h1 {
+        font-size: 1.6rem;
+      }
+      
+      .question-text {
+        font-size: 1.3rem;
+      }
+    }
+
+    /* Ajustes para tablets y pantallas más grandes */
+    @media (min-width: 768px) {
+      body {
+        padding: 20px;
+      }
+      
+      .container {
+        padding: 2rem;
+        max-width: 600px;
+      }
+    }
+
+    /* Evitar zoom en input en iOS */
+    input, textarea, select {
+      font-size: 16px;
     }
   </style>
 </head>
@@ -586,7 +689,7 @@
       yesBtn.style.transform = 'scale(1.1)';
       
       // Mostrar mensaje feliz
-      responseMessage.textContent = "¡SÍÍÍÍ! 🥳 ¡Me acabas de hacer el hombre más feliz del mundo! 💖 No tienes idea de lo feliz que me haces. ¡Prometo hacértela pasar increíble siempre!";
+      responseMessage.textContent = "TE AMO, MILLAMILLÓN";
       responseMessage.className = 'response-message show happy-message';
       
       // Explosión de corazones
@@ -609,7 +712,7 @@
         const extraMessage = document.createElement('div');
         extraMessage.className = 'response-message show happy-message';
         extraMessage.style.marginTop = '1rem';
-        extraMessage.textContent = "Gracias por aceptar, amor. Te prometo que cada día será especial a tu lado. 💕";
+        extraMessage.textContent = "MUAAAA";
         document.querySelector('.question-box').appendChild(extraMessage);
       }, 3000);
     });
@@ -625,7 +728,7 @@
       document.querySelector('.flower-container').style.animation = 'sadShake 0.5s ease 3';
       
       // Mostrar mensaje triste
-      responseMessage.textContent = "Oh... entiendo 😔 Mi corazón se parte en mil pedazos, pero respeto tu decisión. Solo quería decirte lo especial que eres para mí. Quizás en otro momento...";
+      responseMessage.textContent = "Bye, no me hables";
       responseMessage.className = 'response-message show sad-message';
       
       // Cambiar color de corazones a rosa oscuro
@@ -647,7 +750,7 @@
         const extraMessage = document.createElement('div');
         extraMessage.className = 'response-message show sad-message';
         extraMessage.style.marginTop = '1rem';
-        extraMessage.textContent = "Aunque me duela, siempre tendré un cariño especial por ti. Gracias por tu honestidad.";
+        extraMessage.textContent = "Tú q";
         document.querySelector('.question-box').appendChild(extraMessage);
       }, 3000);
     });
